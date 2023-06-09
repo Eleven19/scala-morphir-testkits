@@ -1,14 +1,10 @@
-import io.kipp.mill.ci.release.SonatypeHost
-import mill.scalalib.publish.Developer
-import mill.scalalib.publish.VersionControl
-import mill.scalalib.publish.License
-import mill.scalalib.publish.PomSettings
+import mill.scalalib.publish._
 import mill.scalalib.scalafmt._
 import $ivy.`io.chris-kipp::mill-ci-release::0.1.9`
 import $ivy.`com.github.lolgab::mill-crossplatform::0.2.3`
 import mill._, mill.scalalib._, mill.scalajslib._, mill.scalanativelib._
 import com.github.lolgab.mill.crossplatform._
-import io.kipp.mill.ci.release.CiReleaseModule
+import io.kipp.mill.ci.release._
 
 trait MyPublishModule extends CiReleaseModule {
     override def pomSettings = PomSettings(
@@ -23,6 +19,11 @@ trait MyPublishModule extends CiReleaseModule {
     )
 
     override def sonatypeHost: Option[SonatypeHost] = Some(SonatypeHost.s01)
+
+    override def artifactName: T[String] = T {
+        val name = super.artifactName()
+        s"morphir-$name"
+    }
 }
 
 trait CommonNative extends ScalaNativeModule {

@@ -1,3 +1,3 @@
-package io.eleven19.morphir.testkit
+package io.github.eleven19.morphir.testkit
 
 trait MorphirElmShim
